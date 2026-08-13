@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digital Logic Simulator — Georgia</title>
+<title>Digital Logic Simulator: Georgia Zhang</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
 <body>
 
 <header>
-  <a class="name" href="../index.html">Georgia</a>
+  <a class="name" href="../index.html">Georgia Zhang</a>
   <nav>
     <a href="../index.html#about">About</a>
     <a href="../index.html#projects">Projects</a>
@@ -46,7 +46,7 @@
 <section class="detail-section">
   <h2>Overview</h2>
   <p>
-    This ECE243 project is an interactive digital logic circuit simulator implemented on the NIOS-V processor running on the DE1-SoC development board. The system is written entirely in bare-metal C — no operating system, no hardware abstraction layer — with every feature implemented through direct interaction with memory-mapped I/O (MMIO).
+    This ECE243 project is an interactive digital logic circuit simulator implemented on the NIOS-V processor running on the DE1-SoC development board. The system is written entirely in bare-metal C: no operating system, no hardware abstraction layer: with every feature implemented through direct interaction with memory-mapped I/O (MMIO).
   </p>
   <p>
     The simulator supports both combinational and sequential logic. A user describes a circuit in a file, compiles it, and loads it into memory; the simulator builds the circuit and lets the user modify its inputs live using a PS/2 keyboard. The circuit is rendered on a VGA monitor with wire states drawn in red or green, and smaller combinational circuits can automatically generate a truth table.
@@ -57,10 +57,10 @@
   <h2>Hardware Interaction</h2>
   <p>All peripherals are controlled by reading from and writing to fixed physical memory addresses:</p>
   <ul>
-    <li><b>VGA Controller</b> — pixel data is written directly to a memory-mapped framebuffer.</li>
-    <li><b>PS/2 Keyboard</b> — input is handled by polling the PS/2 data register.</li>
-    <li><b>HEX Displays &amp; LEDs</b> — driven by writing bitmasks to their respective MMIO registers.</li>
-    <li><b>Circuit Memory</b> — compiled circuit data is loaded into SDRAM at address <code>0x40000000</code> using GDB.</li>
+    <li><b>VGA Controller</b>: pixel data is written directly to a memory-mapped framebuffer.</li>
+    <li><b>PS/2 Keyboard</b>: input is handled by polling the PS/2 data register.</li>
+    <li><b>HEX Displays &amp; LEDs</b>: driven by writing bitmasks to their respective MMIO registers.</li>
+    <li><b>Circuit Memory</b>: compiled circuit data is loaded into SDRAM at address <code>0x40000000</code> using GDB.</li>
   </ul>
   <p>The simulator itself is compiled into a RISC-V ELF binary and executed directly on the processor.</p>
 </section>
@@ -70,7 +70,7 @@
   <ol>
     <li>The circuit is designed and described in a <code>.log</code> file, with each gate entry on its own line, in the format:
       <div class="code-block">[GATE TYPE] [INPUT 1 ID] [INPUT 2 ID] [OUTPUT ID] [X COORDINATE] [Y COORDINATE]</div>
-      Note: when defining a MUX gate, the wire at index (INPUT 2 ID + 1) must be free — it's assigned to the multiplexer's select input.
+      Note: when defining a MUX gate, the wire at index (INPUT 2 ID + 1) must be free: it's assigned to the multiplexer's select input.
     </li>
     <li>The <code>.log</code> file is dragged into the Logipile.exe compiler, which converts it into a <code>.bin</code> binary.</li>
     <li>The binary is moved to the working directory and written into memory at <code>0x40000000</code> using the <code>restore</code> command in GDB:
@@ -83,11 +83,11 @@
   <h2>Controls</h2>
   <p>The PS/2 keyboard controls which screen is displayed and lets the user navigate and edit input wires.</p>
   <ul>
-    <li><b>UP / DOWN</b> — navigate selection between input wires (selected wire is highlighted in purple and bolded).</li>
-    <li><b>0 / 1</b> — set the selected input wire's value.</li>
-    <li><b>ENTER</b> — toggle the homescreen / instruction page.</li>
-    <li><b>T</b> — show the truth table, when available (not available for sequential circuits with latches).</li>
-    <li><b>KEY0</b> — read memory at <code>0x40000000</code> and load the new circuit onto the VGA.</li>
+    <li><b>UP / DOWN</b>: navigate selection between input wires (selected wire is highlighted in purple and bolded).</li>
+    <li><b>0 / 1</b>: set the selected input wire's value.</li>
+    <li><b>ENTER</b>: toggle the homescreen / instruction page.</li>
+    <li><b>T</b>: show the truth table, when available (not available for sequential circuits with latches).</li>
+    <li><b>KEY0</b>: read memory at <code>0x40000000</code> and load the new circuit onto the VGA.</li>
   </ul>
 </section>
 
@@ -95,7 +95,7 @@
   <h2>Output Displays</h2>
   <ul>
     <li>The <b>VGA monitor</b> shows the instruction page on reset or ENTER, the circuit during normal operation, or the truth table on T.</li>
-    <li>The <b>HEX display</b> shows "notbl" when a truth table isn't available — e.g. for circuits with too many inputs/outputs, or sequential circuits.</li>
+    <li>The <b>HEX display</b> shows "notbl" when a truth table isn't available: e.g. for circuits with too many inputs/outputs, or sequential circuits.</li>
     <li>The <b>LEDs</b> show the state of the output wires, indexed by wire number.</li>
   </ul>
 </section>
