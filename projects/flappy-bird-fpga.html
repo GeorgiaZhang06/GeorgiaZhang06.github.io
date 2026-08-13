@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice-Controlled Flappy Bird (FPGA): Georgia Zhang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header>
+  <a class="name" href="../index.html">Georgia Zhang</a>
+  <nav>
+    <a href="../index.html#about">About</a>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../index.html#skills">Skills</a>
+    <a href="../index.html#involvement">Involvement</a>
+    <a href="../index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="detail-hero">
+  <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
+  <h1>Voice-Controlled "Flappy Bird" Game</h1>
+  <div class="subtitle">Hardware-based side-scrolling game on the Terasic DE1-SoC (Cyclone V)</div>
+  <div class="tags">
+    <span class="tag">Verilog</span>
+    <span class="tag">FPGA</span>
+    <span class="tag">VGA</span>
+    <span class="tag">Audio DSP</span>
+  </div>
+
+  <div class="detail-photo">project photo</div>
+  <!-- To add a photo: replace the div above with
+       <div class="detail-photo"><img src="../images/flappy-bird-fpga.jpg" alt="Voice-Controlled Flappy Bird"></div> -->
+
+  <div class="callout">
+    In compliance with university academic integrity policies, the source code for this project is not public.
+  </div>
+</section>
+
+<section class="detail-section">
+  <h2>Overview</h2>
+  <p>
+    A hardware-based side-scrolling game implemented in Verilog on the Terasic DE1-SoC (Cyclone V) platform, using real-time audio processing for character control and VGA output for display. Traditional button inputs are replaced with voice-amplitude control: the player "jumps" by making noise into a microphone, which is processed through the FPGA's onboard audio codec.
+  </p>
+</section>
+
+<section class="detail-section">
+  <h2>Key Features</h2>
+  <ul>
+    <li><b>Real-time audio processing</b> : digital signal processing of microphone input to determine jump strength.</li>
+    <li><b>VGA graphics</b> : 640x480 resolution graphics driven by a custom-built VGA controller and arbiter.</li>
+    <li><b>Hardware collision detection</b> : pixel-accurate collision logic between the player sprite and dynamic pillar obstacles.</li>
+    <li><b>Dynamic difficulty</b> : obstacle gaps change position based on the player's score.</li>
+  </ul>
+</section>
+
+<section class="detail-section">
+  <h2>System Architecture</h2>
+  <ul>
+    <li><b>Audio Subsystem (<code>volume.v</code>)</b> : interfaces with the Wolfson WM8731 codec via I2C to capture 16-bit audio samples, and calculates signal magnitude to trigger the jump logic.</li>
+    <li><b>VGA Arbiter (<code>vga_demo.v</code>)</b> : a finite state machine that manages bus access between the player, pillars, and background reset modules to prevent screen tearing.</li>
+    <li><b>Physics Module (<code>player.v</code>)</b> : implements gravity and velocity-based movement.</li>
+    <li><b>Collision Module (<code>collision.v</code>)</b> : purely combinational logic that monitors coordinate overlaps to trigger a game-over state.</li>
+  </ul>
+</section>
+
+<section class="detail-section">
+  <h2>Hardware Requirements</h2>
+  <ul>
+    <li>FPGA: Terasic DE1-SoC</li>
+    <li>Display: VGA monitor (640x480 @ 60Hz)</li>
+    <li>Audio: 3.5mm microphone (line-in)</li>
+  </ul>
+</section>
+
+<section class="detail-section">
+  <h2>Implementation Details</h2>
+  <p>
+    The game uses a finite state machine to handle the drawing of objects. To keep performance smooth, the background is only redrawn on a reset or collision, while moving objects (the bird and pillars) use an erase-and-redraw cycle within the VGA arbiter.
+  </p>
+</section>
+
+<section class="detail-section">
+  <h2>Score System</h2>
+  <p>
+    The score is tracked using a binary-to-BCD converter and displayed in real time on the HEX0-HEX5 seven-segment displays.
+  </p>
+</section>
+
+</body>
+</html>
