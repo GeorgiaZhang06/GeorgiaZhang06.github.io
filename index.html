@@ -51,10 +51,10 @@
     <div class="project">
       <div class="project-body">
         <h3>LoRa Mesh Air Quality Network</h3>
-        <p>An ESP32 + cellular gateway for a LoRa mesh air-quality sensor network deployed at Toronto's Meadoway. Built
-          the firmware architecture on FreeRTOS, publishing sensor data to AWS IoT Core over MQTT, with custom battery
-          estimation and deep-sleep power management. Also developed a 4-layer electrochemical sensor breakout board for
-          the network's sensor nodes.</p>
+        <p>An ESP32 + SIM7080G cellular gateway built for a LoRa mesh air-quality sensor network deployed at Toronto's
+          Meadoway, paired with a custom 4-layer electrochemical sensor breakout board for the network's sensor nodes.
+          The gateway collects readings from the mesh, buffers and manages them locally, and publishes them to the cloud
+          over a cellular uplink, where data is managed and visualized using InfluxDB and Grafana.</p>
         <div class="project-tags"><span>FreeRTOS</span><span>ESP32</span><span>AWS IoT
             Core</span><span>LoRa</span><span>PCB Design</span><span>KiCad</span></div>
         <a class="project-link" href="projects/lora-gateway.html">View project &rarr;</a>
@@ -155,6 +155,8 @@
           <li>LoRa</li>
           <li>Cellular / AT commands</li>
           <li>I2C / UART / SPI</li>
+          <li>InfluxDB</li>
+          <li>Grafana</li>
         </ul>
       </div>
       <div class="skill-group">

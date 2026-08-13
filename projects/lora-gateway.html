@@ -37,6 +37,8 @@
       <span class="tag">LoRa</span>
       <span class="tag">Cellular (SIM7080G)</span>
       <span class="tag">PCB Design</span>
+      <span class="tag">InfluxDB</span>
+      <span class="tag">Grafana</span>
     </div>
 
     <div class="detail-photo"><img src="../images/lora-gateway.jpg" alt="LoRa Mesh Air Quality Gateway"></div>
@@ -48,8 +50,9 @@
     <h2>Overview</h2>
     <p>
       An ESP32 + SIM7080G cellular gateway built for a LoRa mesh air-quality sensor network deployed at Toronto's
-      Meadoway. The gateway collects readings from the mesh, buffers and manages them locally, and publishes them to the
-      cloud over a cellular uplink.
+      Meadoway, paired with a custom 4-layer electrochemical sensor breakout board for the network's sensor nodes. The
+      gateway collects readings from the mesh, buffers and manages them locally, and publishes them to the cloud over a
+      cellular uplink, where data is managed and visualized using InfluxDB and Grafana.
     </p>
   </section>
 
