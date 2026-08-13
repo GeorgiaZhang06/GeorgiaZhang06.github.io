@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoRa Mesh Air Quality Gateway — Georgia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header>
+  <a class="name" href="../index.html">Georgia</a>
+  <nav>
+    <a href="../index.html#about">About</a>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../index.html#skills">Skills</a>
+    <a href="../index.html#involvement">Involvement</a>
+    <a href="../index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="detail-hero">
+  <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
+  <h1>LoRa Mesh Air Quality Gateway</h1>
+  <div class="subtitle">ESP32 + cellular gateway for a LoRa mesh sensor network</div>
+  <div class="tags">
+    <span class="tag">FreeRTOS</span>
+    <span class="tag">ESP32</span>
+    <span class="tag">AWS IoT Core</span>
+    <span class="tag">LoRa</span>
+    <span class="tag">Cellular (SIM7080G)</span>
+  </div>
+
+  <div class="detail-photo">project photo</div>
+  <!-- To add a photo: replace the div above with
+       <div class="detail-photo"><img src="../images/lora-gateway.jpg" alt="LoRa Mesh Air Quality Gateway"></div> -->
+</section>
+
+<section class="detail-section">
+  <h2>Overview</h2>
+  <p>
+    An ESP32 + SIM7080G cellular gateway built for a LoRa mesh air-quality sensor network deployed at Toronto's Meadoway. The gateway collects readings from the mesh, buffers and manages them locally, and publishes them to the cloud over a cellular uplink.
+  </p>
+</section>
+
+<section class="detail-section">
+  <h2>Firmware Architecture</h2>
+  <ul>
+    <li>A FreeRTOS task architecture covering the uplink state machine, cloud connection handling, configuration management, and modem power control.</li>
+    <li>Data is published over MQTT to AWS IoT Core.</li>
+    <li>RTC-persisted state carries key variables across deep sleep cycles, so the gateway resumes correctly after each wake.</li>
+    <li>A custom lookup-table-based fuel gauge estimates remaining battery from voltage, tuned to the discharge curve of the cell in use.</li>
+  </ul>
+  <p>More detail on the specific bugs and design decisions coming soon.</p>
+</section>
+
+</body>
+</html>
