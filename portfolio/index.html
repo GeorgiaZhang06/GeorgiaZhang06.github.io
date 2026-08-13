@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Georgia — ECE, University of Toronto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a class="name" href="index.html">Georgia</a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#involvement">Involvement</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Georgia</h1>
+    <div class="role">Electrical &amp; Computer Engineering, University of Toronto</div>
+    <p>Third-year ECE student focused on embedded systems and firmware, currently preparing for my PEY co-op. I build and debug things at the hardware/software boundary — from satellite firmware to IoT sensor networks.</p>
+    <div class="tags">
+      <span class="tag">UofT ECE '28</span>
+      <span class="tag">PEY Co-op</span>
+      <span class="tag">UTAT Space Systems</span>
+      <span class="tag">UTRA</span>
+    </div>
+  </div>
+  <div class="hero-photo">
+    add your<br>photo here
+  </div>
+  <!-- To add your headshot: replace the div above with
+       <div class="hero-photo"><img src="images/profile.jpg" alt="Georgia"></div> -->
+</section>
+
+<section id="about" class="about">
+  <h2 class="sec-title">About</h2>
+  <p>
+    I'm an ECE student at the University of Toronto working across two main tracks: firmware for UTAT Space Systems' satellite on-board computer, and IoT/embedded systems through independent and design-team projects. I also serve as VP of Partnerships for UTRA, the university's robotics association.
+    Outside of firmware, I've worked on embedded systems for the Human Powered Vehicle Design Team, and I'm always looking for the next project that mixes hardware, code, and figuring out why something isn't booting.
+  </p>
+</section>
+
+<section id="projects">
+  <h2 class="sec-title">Projects</h2>
+
+  <div class="project">
+    <div class="project-photo">project photo</div>
+    <div class="project-body">
+      <h3>LoRa Mesh Air Quality Gateway</h3>
+      <p>An ESP32 + cellular gateway for a LoRa mesh air-quality sensor network deployed at Toronto's Meadoway. Built the firmware architecture on FreeRTOS, publishing sensor data to AWS IoT Core over MQTT, with custom battery estimation and deep-sleep power management.</p>
+      <div class="project-tags"><span>FreeRTOS</span><span>ESP32</span><span>AWS IoT Core</span><span>LoRa</span></div>
+      <a class="project-link" href="projects/lora-gateway.html">View project &rarr;</a>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-photo">project photo</div>
+    <div class="project-body">
+      <h3>Satellite Firmware — UTAT Space Systems</h3>
+      <p>Bringing up the on-board computer firmware for a custom STM32-based satellite board using Zephyr RTOS and MCUboot, including a signed dual-slot update system and custom flash partition layout.</p>
+      <div class="project-tags"><span>Zephyr RTOS</span><span>MCUboot</span><span>STM32</span></div>
+      <a class="project-link" href="projects/satellite-firmware.html">View project &rarr;</a>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-photo">project photo</div>
+    <div class="project-body">
+      <h3>Digital Logic Simulator</h3>
+      <p>A bare-metal interactive digital logic circuit simulator built for the DE1-SoC FPGA board, running directly on the NIOS-V processor with no OS and no HAL — every peripheral is driven through direct memory-mapped I/O.</p>
+      <div class="project-tags"><span>Bare-metal C</span><span>MMIO</span><span>DE1-SoC / NIOS-V</span><span>VGA</span></div>
+      <a class="project-link" href="projects/digital-logic-simulator.html">View project &rarr;</a>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-photo">project photo</div>
+    <div class="project-body">
+      <h3>Human Powered Vehicle — Embedded Systems</h3>
+      <p>Embedded systems work for UofT's Human Powered Vehicle Design Team.</p>
+      <div class="project-tags"><span>Embedded Systems</span></div>
+      <a class="project-link" href="projects/hpv.html">View project &rarr;</a>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-photo">project photo</div>
+    <div class="project-body">
+      <h3>UTRA — Partnerships &amp; Sponsorship</h3>
+      <p>As VP of Partnerships for the University of Toronto Robotics Association, I lead sponsorship strategy and outreach, including exploring in-kind support with industry and Faculty partners.</p>
+      <div class="project-tags"><span>Partnerships</span><span>Sponsorship</span></div>
+      <a class="project-link" href="projects/utra-partnerships.html">View project &rarr;</a>
+    </div>
+  </div>
+
+  <!-- To add another project: copy one .project block above, edit the text,
+       and create a matching page in /projects/ (use an existing page as a template). -->
+
+</section>
+
+<section id="skills">
+  <h2 class="sec-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h4>Languages &amp; RTOS</h4>
+      <ul><li>C / C++</li><li>FreeRTOS</li><li>Zephyr RTOS</li><li>MCUboot</li></ul>
+    </div>
+    <div class="skill-group">
+      <h4>Comms &amp; Cloud</h4>
+      <ul><li>MQTT / AWS IoT Core</li><li>LoRa</li><li>Cellular / AT commands</li><li>I2C / UART / GPIO</li></ul>
+    </div>
+    <div class="skill-group">
+      <h4>Hardware</h4>
+      <ul><li>ESP32 / STM32 / NIOS-V (DE1-SoC)</li><li>Power system design</li><li>PCB-level debugging</li><li>Memory-mapped I/O</li></ul>
+    </div>
+    <div class="skill-group">
+      <h4>Tools</h4>
+      <ul><li>Git</li><li>west / Zephyr build system</li><li>GDB</li><li>LaTeX</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="involvement">
+  <h2 class="sec-title">Involvement</h2>
+  <div class="role-row">
+    <div class="org">UTAT</div>
+    <div><h3>Space Systems — Firmware</h3><p>Satellite on-board computer firmware, Zephyr RTOS and MCUboot.</p></div>
+  </div>
+  <div class="role-row">
+    <div class="org">UTRA</div>
+    <div><h3>VP of Partnerships</h3><p>Robotics design team — sponsorship strategy and industry/Faculty outreach.</p></div>
+  </div>
+  <div class="role-row">
+    <div class="org">HPV</div>
+    <div><h3>Embedded Systems Developer</h3><p>Human Powered Vehicle Design Team.</p></div>
+  </div>
+</section>
+
+<footer id="contact">
+  <h2>Get in touch</h2>
+  <p>Open to firmware and embedded systems internships.</p>
+  <div class="links">
+    <a href="mailto:your.email@mail.utoronto.ca">Email</a>
+    <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/zhang-georgia" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="#">Resume</a>
+  </div>
+  <div class="fine">Georgia — Electrical &amp; Computer Engineering, University of Toronto</div>
+</footer>
+
+</body>
+</html>
