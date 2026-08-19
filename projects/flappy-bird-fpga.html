@@ -34,9 +34,7 @@
     <div class="tags">
       <span class="tag">Verilog</span>
       <span class="tag">FPGA</span>
-      <span class="tag">FSM</span>
-      <span class="tag">VGA</span>
-      <span class="tag">I2C</span>
+      <span class="tag">FSM Architecture</span>
       <span class="tag">ModelSim</span>
     </div>
 
@@ -80,7 +78,8 @@
     <ul>
       <li><b>Audio subsystem</b> : interfaces with the Wolfson WM8731 audio codec through I2C and processes
         microphone samples to determine signal amplitude.</li>
-      <li><b>Player physics</b> : updates vertical position using velocity and applies gravity between audio inputs.</li>
+      <li><b>Player physics</b> : updates vertical position using velocity and applies gravity between audio inputs.
+      </li>
       <li><b>VGA arbiter</b> : coordinates draw and erase requests from the player, pillars, and background modules
         through an FSM.</li>
       <li><b>Collision detection</b> : checks coordinate boundaries between the player, pillars, and screen edges
