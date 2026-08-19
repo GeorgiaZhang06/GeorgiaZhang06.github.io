@@ -1,0 +1,84 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP32 Digital Camera: Georgia Zhang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+  <header>
+    <a class="name" href="../index.html">Georgia Zhang</a>
+    <nav>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#involvement">Involvement</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="detail-hero">
+    <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
+
+    <h1>ESP32 Digital Camera</h1>
+    <div class="subtitle">Standalone digital camera built around an ESP32</div>
+
+    <div class="tags">
+      <span class="tag">C++</span>
+      <span class="tag">ESP32</span>
+      <span class="tag">Camera</span>
+      <span class="tag">WiFi</span>
+      <span class="tag">Soldering</span>
+      <span class="tag">Hardware</span>
+    </div>
+
+    <div class="detail-photo">
+      <img src="../images/esp32-camera.jpg" alt="ESP32 Digital Camera">
+    </div>
+
+    <p style="color:var(--muted); font-family:var(--mono); font-size:0.85rem; margin-top:18px;">
+      Jul. 2026 - Aug. 2026
+    </p>
+  </section>
+
+  <section class="detail-section">
+    <h2>Overview</h2>
+    <p>
+      Built a standalone digital camera using an ESP32 camera module, with physical
+      shutter and flash controls. The project combined embedded C++ firmware with
+      hands-on hardware assembly and a custom enclosure.
+    </p>
+  </section>
+
+  <section class="detail-section">
+    <h2>Firmware</h2>
+    <ul>
+      <li><b>Image capture</b> : configured the ESP32 camera to capture JPEG images and store the latest frame in
+        memory.</li>
+      <li><b>Physical controls</b> : implemented shutter and flash buttons with debouncing and press detection.</li>
+      <li><b>WiFi</b> : connected the camera to WiFi and hosted a camera server for remote viewing.</li>
+    </ul>
+  </section>
+
+  <section class="detail-section">
+    <h2>Hardware Build</h2>
+    <ul>
+      <li><b>Assembly</b> : soldered the shutter button, flash button, and LED connections to the camera hardware.</li>
+      <li><b>Enclosure</b> : built a custom outer casing to house the camera and physical controls.</li>
+    </ul>
+  </section>
+
+</body>
+
+</html>
+```
