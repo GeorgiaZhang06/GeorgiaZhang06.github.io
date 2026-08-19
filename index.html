@@ -51,10 +51,10 @@
     <div class="project">
       <div class="project-body">
         <h3>LoRa Mesh Air Quality Network</h3>
-        <p>An ESP32 + SIM7080G cellular gateway built for a LoRa mesh air-quality sensor network deployed at Toronto's
-          Meadoway, paired with a custom 4-layer electrochemical sensor breakout board for the network's sensor nodes.
-          The gateway collects readings from the mesh, buffers and manages them locally, and publishes them to the cloud
-          over a cellular uplink, where data is managed and visualized using InfluxDB and Grafana.</p>
+        <p>An off-grid air-quality monitoring network designed to collect environmental measurements
+          from distributed sensor nodes and send them to the cloud. Sensor nodes communicate over
+          a LoRa mesh network, while an ESP32 gateway collects the data and uses a SIM7080G cellular
+          modem to upload it to AWS IoT Core.</p>
         <div class="project-tags"><span>FreeRTOS</span><span>ESP32</span><span>AWS IoT
             Core</span><span>LoRa</span><span>PCB Design</span><span>KiCad</span></div>
         <a class="project-link" href="projects/lora-gateway.html">View project &rarr;</a>
@@ -76,8 +76,10 @@
     <div class="project">
       <div class="project-body">
         <h3>Digital Logic Simulator</h3>
-        <p>A bare-metal interactive digital logic circuit simulator built for the DE1-SoC FPGA board, running directly
-          on the NIOS-V processor with every peripheral driven through direct memory-mapped I/O.
+        <p>A bare-metal digital logic simulator written in <b>C</b> and deployed on the
+          <b>NIOS-V</b> processor of the DE1-SoC FPGA board. The simulator builds and
+          evaluates user-defined digital circuits containing combinational and sequential
+          logic, then displays the circuit and wire states on a VGA monitor.
         </p>
         <div class="project-tags"><span>Bare-metal C</span><span>MMIO</span><span>DE1-SoC /
             NIOS-V</span><span>VGA</span></div>
@@ -89,8 +91,9 @@
     <div class="project">
       <div class="project-body">
         <h3>Software Defined Radio: RF Subsystem</h3>
-        <p>Designed and fabricated a 3-stage RF front-end PCB in Altium, including a bandpass filter, dual-channel
-          mixer, and baseband amplifier, achieving 20.32 dB downconversion gain.</p>
+        <p>Designed and fabricated the RF front-end for a software-defined radio. The subsystem filters an
+          8–16 MHz RF input, downconverts it into in-phase (I) and quadrature (Q) signals, then filters and
+          amplifies the resulting baseband signals.</p>
         <div class="project-tags"><span>Altium</span><span>LTSpice</span><span>RF / PCB Design</span></div>
         <a class="project-link" href="projects/sdr-rf-subsystem.html">View project &rarr;</a>
       </div>
@@ -101,8 +104,8 @@
     <div class="project">
       <div class="project-body">
         <h3>Lighting Control PCB</h3>
-        <p>Designed an ESP32-based control PCB in KiCad with a 3-rail power system and CAN bus node, and wrote the C++
-          firmware for peripheral I/O, rollover detection, and lighting control.</p>
+        <p>Embedded systems development for the University of Toronto Human Powered Vehicle Design Team,
+          developing the vehicle's lighting control hardware and firmware.</p>
         <div class="project-tags"><span>Embedded Systems</span><span>KiCad</span><span>ESP32</span></div>
         <a class="project-link" href="projects/hpv.html">View project &rarr;</a>
       </div>
@@ -112,8 +115,9 @@
     <div class="project">
       <div class="project-body">
         <h3>Voice-Controlled "Flappy Bird" Game</h3>
-        <p>A hardware-based side-scrolling game built in Verilog on the DE1-SoC FPGA, using real-time microphone audio
-          processing for player control and a custom VGA controller for display.</p>
+        <p>A hardware-based side-scrolling game implemented in synthesizable Verilog on the Terasic DE1-SoC.
+          Microphone amplitude controls the player's vertical velocity: louder input produces a larger upward
+          velocity. The game runs entirely on FPGA hardware and renders gameplay through a custom VGA interface.</p>
         <div class="project-tags"><span>Verilog</span><span>FPGA</span><span>VGA</span><span>Audio DSP</span></div>
         <a class="project-link" href="projects/flappy-bird-fpga.html">View project &rarr;</a>
       </div>
@@ -123,8 +127,8 @@
     <div class="project">
       <div class="project-body">
         <h3>Sumo Robotics Team</h3>
-        <p>Led a team of 100+ engineers through the autonomous sumo robot development cycle, and ran hands-on Arduino
-          and SolidWorks training seminars for team members.</p>
+        <p>Project management for UTRA's SUMO robotics team, supporting over 100 engineers across hardware,
+          firmware, mechanical design, and competition preparation for autonomous SUMO robots.</p>
         <div class="project-tags"><span>Project Management</span><span>Arduino</span><span>SolidWorks</span></div>
         <a class="project-link" href="projects/utra-project-manager.html">View project &rarr;</a>
       </div>
@@ -185,41 +189,46 @@
 
   <section id="involvement">
     <h2 class="sec-title">Experience/Involvement</h2>
+
     <div class="role-row">
       <div class="org">University of Toronto Network Research Lab</div>
       <div>
-        <h3>Embedded Systems Student Intern (May 2026 - Aug. 2026)</h3>
-        <p>ESP32 + cellular LoRa mesh air-quality gateway (Meadoway, Toronto) with FreeRTOS firmware, AWS IoT Core/MQTT
-          uplink, and a custom 4-layer electrochemical sensor breakout board.</p>
+        <h3>Embedded Systems Student Intern (May 2026 – Aug. 2026)</h3>
+        <p>Built FreeRTOS firmware for an ESP32 cellular LoRa mesh gateway and designed a 4-layer electrochemical
+          breakout board for nanoamp current measurements.</p>
       </div>
     </div>
+
     <div class="role-row">
       <div class="org">University of Toronto Aerospace Team (UTAT)</div>
       <div>
-        <h3>Space Systems: Firmware Developer (May 2026 - Present)</h3>
-        <p>Satellite on-board computer firmware, Zephyr RTOS and MCUboot.</p>
+        <h3>Space Systems: Firmware Developer (May 2026 – Present)</h3>
+        <p>Developing satellite on-board computer firmware with Zephyr RTOS and MCUboot on STM32.</p>
       </div>
     </div>
+
     <div class="role-row">
-      <div class="org">Univeristy of Toronto Robotics Association (UTRA)</div>
+      <div class="org">University of Toronto Robotics Association (UTRA)</div>
       <div>
-        <h3>VP of Partnerships (May 2026 - Present)</h3>
-        <p>Sponsorship strategy and industry/Faculty outreach.</p>
+        <h3>VP of Partnerships (May 2026 – Present)</h3>
+        <p>Created sponsorship packages and technical reports to communicate project needs and build industry
+          partnerships.</p>
       </div>
     </div>
+
     <div class="role-row">
       <div class="org">Human Powered Vehicle Design Team (HPVDT)</div>
       <div>
-        <h3>Embedded Systems Developer Sep. 2025 – Present</h3>
-        <p>ESP32 control PCB design and firmware.</p>
+        <h3>Embedded Systems Developer (Sep. 2025 – Present)</h3>
+        <p>Designed an ESP32 control PCB and developed firmware for rollover detection and vehicle lighting control.</p>
       </div>
     </div>
+
     <div class="role-row">
-      <div class="org">Univeristy of Toronto Robotics Association (UTRA)</div>
+      <div class="org">University of Toronto Robotics Association (UTRA)</div>
       <div>
         <h3>SUMO Team Project Manager (May 2025 – May 2026)</h3>
-        <p>Lead 100+ engineers through an autonomous sumo
-          robot build. </p>
+        <p>Led 100+ engineers through autonomous SUMO robot development and ran firmware and hardware workshops.</p>
       </div>
     </div>
   </section>

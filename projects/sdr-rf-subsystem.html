@@ -28,32 +28,81 @@
 
   <section class="detail-hero">
     <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
+
     <h1>Software Defined Radio: RF Subsystem</h1>
-    <div class="subtitle">Altium, LTSpice, Python, PCB Design</div>
+    <div class="subtitle">3-stage RF front-end PCB for a software-defined radio</div>
+
     <div class="tags">
       <span class="tag">Altium</span>
       <span class="tag">LTSpice</span>
-      <span class="tag">Python</span>
-      <span class="tag">RF / PCB Design</span>
+      <span class="tag">RF Design</span>
+      <span class="tag">PCB Design</span>
+      <span class="tag">Oscilloscope</span>
     </div>
 
-    <div class="detail-photo"><img src="../images/sdr-rf-subsystem.jpg" alt="Software Defined Radio RF Subsystem"></div>
-    <!-- To add a photo: replace the div above with
-       <div class="detail-photo"><img src="../images/sdr-rf-subsystem.jpg" alt="Software Defined Radio RF Subsystem"></div> -->
+    <div class="detail-photo">
+      <img src="../images/sdr-rf-subsystem.jpg" alt="Software Defined Radio RF Subsystem">
+    </div>
 
-    <p style="color:var(--muted); font-family:var(--mono); font-size:0.85rem; margin-top:18px;">Jan. 2026 – Apr. 2026
+    <p style="color:var(--muted); font-family:var(--mono); font-size:0.85rem; margin-top:18px;">
+      Jan. 2026 – Apr. 2026
     </p>
   </section>
 
   <section class="detail-section">
     <h2>Overview</h2>
+    <p>
+      Designed and fabricated the RF front-end for a software-defined radio. The subsystem filters an
+      8–16 MHz RF input, downconverts it into in-phase (I) and quadrature (Q) signals, then filters and
+      amplifies the resulting baseband signals.
+    </p>
+  </section>
+
+  <section class="detail-section">
+    <h2>RF Front-End</h2>
     <ul>
-      <li>Designed and fabricated a 3-stage RF front-end PCB in Altium comprising a bandpass filter, dual-channel mixer,
-        and baseband amplifier.</li>
-      <li>Synthesized a 3rd-order LC Butterworth bandpass filter in LTSpice with 50Ω matching; measured band edges at
-        8.55 MHz and 14.82 MHz via automated oscilloscope FRA sweep.</li>
-      <li>Characterized baseband gain by driving a differential signal into a dual op-amp layout (OPA1642AIDR),
-        achieving 20.32 dB downconversion gain at 3.3 V.</li>
+      <li><b>Bandpass filter</b> : designed a 3rd-order LC Butterworth filter with 50&Omega; input and output
+        matching for the 8–16 MHz RF passband.</li>
+
+      <li><b>Quadrature mixer</b> : implemented separate I and Q double-balanced mixer paths using RF transformers
+        and Schottky diodes for RF downconversion.</li>
+
+      <li><b>I/Q amplifier</b> : designed active low-pass amplifier stages to remove mixer products above 96 kHz
+        while providing the required baseband gain.</li>
+    </ul>
+  </section>
+
+  <section class="detail-section">
+    <h2>Simulation &amp; Testing</h2>
+    <ul>
+      <li><b>Filter simulation</b> : used LTSpice to verify the Butterworth filter response and component values
+        before PCB fabrication.</li>
+
+      <li><b>Filter testing</b> : measured 8.55 MHz and 14.82 MHz band edges using an oscilloscope frequency
+        response analysis sweep.</li>
+
+      <li><b>Mixer testing</b> : applied 9 MHz quadrature LO signals and measured the expected frequency components
+        at the mixer outputs using oscilloscope FFT analysis.</li>
+
+      <li><b>Amplifier testing</b> : measured 20.32 dB gain from a 50 mV input before the amplifier failed during
+        testing.</li>
+    </ul>
+  </section>
+
+  <section class="detail-section">
+    <h2>Debugging</h2>
+    <ul>
+      <li><b>Transformer replacement</b> : replaced a failed RF transformer after no output was measured from the
+        mixer, restoring mixer operation.</li>
+
+      <li><b>TXEN bypass</b> : bypassed a faulty TX enable switch with jumper connections to restore the RF signal
+        path.</li>
+
+      <li><b>Amplifier failure</b> : traced the amplifier supply to approximately 3.3 V instead of the required
+        4.5 V minimum before the OPA1642 failed during testing.</li>
+
+      <li><b>PCB interconnect</b> : corrected three misaligned connector pins between the subsystem PCB and mainboard
+        using jumper wires.</li>
     </ul>
   </section>
 

@@ -18,43 +18,67 @@
   <header>
     <a class="name" href="../index.html">Georgia Zhang</a>
     <nav>
-      <a href="../index.html#about">About</a>
-      <a href="../index.html#projects">Projects</a>
-      <a href="../index.html#skills">Skills</a>
-      <a href="../index.html#involvement">Involvement</a>
-      <a href="../index.html#contact">Contact</a>
-    </nav>
+      <a class="name" href="../index.html">Georgia Zhang</a>
+      <nav>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#involvement">Involvement</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
   </header>
 
   <section class="detail-hero">
     <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
     <h1>Human Powered Vehicle Design Team</h1>
     <div class="subtitle">Embedded Systems Developer</div>
+
     <div class="tags">
-      <span class="tag">Embedded Systems</span>
-      <span class="tag">KiCad</span>
+      <span class="tag">C++</span>
       <span class="tag">ESP32</span>
-      <span class="tag">CAN bus</span>
+      <span class="tag">KiCad</span>
+      <span class="tag">IMU</span>
+      <span class="tag">CAN Bus</span>
+      <span class="tag">PCB Design</span>
     </div>
 
-    <div class="detail-photo"><img src="../images/hpv.jpg" alt="Lighting PCB"></div>
-    <!-- To add a photo: replace the div above with
-       <div class="detail-photo"><img src="../images/hpv.jpg" alt="Human Powered Vehicle"></div> -->
+    <div class="detail-photo">
+      <img src="../images/hpv.jpg" alt="Human Powered Vehicle Lighting PCB">
+    </div>
 
-    <p style="color:var(--muted); font-family:var(--mono); font-size:0.85rem; margin-top:18px;">Sep. 2025 – Present</p>
+    <p style="color:var(--muted); font-family:var(--mono); font-size:0.85rem; margin-top:18px;">
+      Sep. 2025 – Present
+    </p>
   </section>
 
   <section class="detail-section">
     <h2>Overview</h2>
     <p>
-      Embedded systems work for the University of Toronto's Human Powered Vehicle Design Team, covering both the control
-      PCB hardware and the firmware that runs on it.
+      Embedded systems development for the University of Toronto Human Powered Vehicle Design Team,
+      developing the vehicle's lighting control hardware and firmware.
     </p>
+  </section>
+
+  <section class="detail-section">
+    <h2>Control Board</h2>
     <ul>
-      <li>Designed an ESP32-based control PCB in KiCad with a 3-rail (12V / 5V / 3.3V) power system, a CAN bus node, and
-        USB-C input.</li>
-      <li>Wrote C++ firmware for peripheral I/O, rollover detection, and lighting array control.</li>
+      <li><b>PCB design</b> : designed an ESP32-based lighting control board in KiCad with 12V, 5V, and 3.3V
+        power rails and a CAN bus interface.</li>
+      <li><b>IMU sensing</b> : integrated an IMU to measure vehicle orientation and detect rollover conditions.</li>
+      <li><b>Lighting control</b> : implemented C++ firmware to trigger the vehicle's warning lighting when
+        rollover thresholds are exceeded.</li>
+      <li><b>Vehicle communication</b> : added CAN bus communication for interfacing the lighting controller
+        with other vehicle control boards.</li>
     </ul>
+  </section>
+
+  <section class="detail-section">
+    <h2>System Operation</h2>
+    <p>
+      The ESP32 continuously reads vehicle orientation from the IMU and compares it against defined rollover
+      thresholds. When the vehicle exceeds these limits, the firmware activates the warning lighting to indicate
+      a rollover condition.
+    </p>
   </section>
 
 </body>

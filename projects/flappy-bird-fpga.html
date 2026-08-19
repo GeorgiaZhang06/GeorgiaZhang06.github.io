@@ -29,19 +29,23 @@
   <section class="detail-hero">
     <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
     <h1>Voice-Controlled "Flappy Bird" Game</h1>
-    <div class="subtitle">Hardware-based side-scrolling game on the Terasic DE1-SoC (Cyclone V)</div>
+    <div class="subtitle">FPGA-based game controlled by microphone amplitude on the Terasic DE1-SoC</div>
+
     <div class="tags">
       <span class="tag">Verilog</span>
       <span class="tag">FPGA</span>
+      <span class="tag">FSM</span>
       <span class="tag">VGA</span>
-      <span class="tag">Audio DSP</span>
+      <span class="tag">I2C</span>
+      <span class="tag">ModelSim</span>
     </div>
 
-    <div class="detail-photo"><img src="../images/flappy-bird-fpga.jpg" alt="Voice-Controlled Flappy Bird"></div>
-    <!-- To add a photo: replace the div above with
-       <div class="detail-photo"><img src="../images/flappy-bird-fpga.jpg" alt="Voice-Controlled Flappy Bird"></div> -->
+    <div class="detail-photo">
+      <img src="../images/flappy-bird-fpga.jpg" alt="Voice-Controlled Flappy Bird">
+    </div>
 
-    <p style="color:var(--muted); font-family:var(--mono); font-size:0.85rem; margin-top:18px;">Oct. 2025 – Dec. 2025
+    <p style="color:var(--muted); font-family:var(--mono); font-size:0.85rem; margin-top:18px;">
+      Oct. 2025 – Dec. 2025
     </p>
 
     <div class="callout">
@@ -52,62 +56,60 @@
   <section class="detail-section">
     <h2>Overview</h2>
     <p>
-      A hardware-based side-scrolling game implemented in Verilog on the Terasic DE1-SoC (Cyclone V) platform, using
-      real-time audio processing for character control and VGA output for display. Traditional button inputs are
-      replaced with voice-amplitude control: the player "jumps" by making noise into a microphone, which is processed
-      through the FPGA's onboard audio codec.
+      A hardware-based side-scrolling game implemented in synthesizable Verilog on the Terasic DE1-SoC.
+      Microphone amplitude controls the player's vertical velocity: louder input produces a larger upward
+      velocity. The game runs entirely on FPGA hardware and renders gameplay through a custom VGA interface.
     </p>
   </section>
 
   <section class="detail-section">
     <h2>Key Features</h2>
     <ul>
-      <li><b>Real-time audio processing</b> : digital signal processing of microphone input to determine jump strength.
-      </li>
-      <li><b>VGA graphics</b> : 640x480 resolution graphics driven by a custom-built VGA controller and arbiter.</li>
-      <li><b>Hardware collision detection</b> : pixel-accurate collision logic between the player sprite and dynamic
-        pillar obstacles.</li>
-      <li><b>Dynamic difficulty</b> : obstacle gaps change position based on the player's score.</li>
+      <li><b>Audio-controlled movement</b> : microphone amplitude is converted into player vertical velocity,
+        allowing louder sounds to move the player upward faster.</li>
+      <li><b>VGA rendering</b> : custom hardware renders the player, pillars, and background at 640x480 resolution.</li>
+      <li><b>Hardware game control</b> : FSMs manage game states, object movement, rendering, collision detection,
+        and score updates.</li>
+      <li><b>Hardware verification</b> : wrote SystemVerilog testbenches and used ModelSim to test individual modules
+        before hardware integration.</li>
     </ul>
   </section>
 
   <section class="detail-section">
     <h2>System Architecture</h2>
     <ul>
-      <li><b>Audio Subsystem (<code>volume.v</code>)</b> : interfaces with the Wolfson WM8731 codec via I2C to capture
-        16-bit audio samples, and calculates signal magnitude to trigger the jump logic.</li>
-      <li><b>VGA Arbiter (<code>vga_demo.v</code>)</b> : a finite state machine that manages bus access between the
-        player, pillars, and background reset modules to prevent screen tearing.</li>
-      <li><b>Physics Module (<code>player.v</code>)</b> : implements gravity and velocity-based movement.</li>
-      <li><b>Collision Module (<code>collision.v</code>)</b> : purely combinational logic that monitors coordinate
-        overlaps to trigger a game-over state.</li>
+      <li><b>Audio subsystem</b> : interfaces with the Wolfson WM8731 audio codec through I2C and processes
+        microphone samples to determine signal amplitude.</li>
+      <li><b>Player physics</b> : updates vertical position using velocity and applies gravity between audio inputs.</li>
+      <li><b>VGA arbiter</b> : coordinates draw and erase requests from the player, pillars, and background modules
+        through an FSM.</li>
+      <li><b>Collision detection</b> : checks coordinate boundaries between the player, pillars, and screen edges
+        to determine game-over conditions.</li>
+      <li><b>Scorekeeping</b> : tracks the score with BCD logic and displays the result on the DE1-SoC seven-segment
+        displays.</li>
     </ul>
   </section>
 
   <section class="detail-section">
-    <h2>Hardware Requirements</h2>
+    <h2>Debugging</h2>
     <ul>
-      <li>FPGA: Terasic DE1-SoC</li>
-      <li>Display: VGA monitor (640x480 @ 60Hz)</li>
-      <li>Audio: 3.5mm microphone (line-in)</li>
+      <li><b>VGA artifacts</b> : eliminated visual streaking by changing pillar rendering from row-by-row to
+        column-by-column drawing.</li>
+      <li><b>Obstacle generation</b> : replaced a failing random number generator with deterministic gap-position
+        cycling to produce stable obstacle placement.</li>
+      <li><b>Background persistence</b> : added a dedicated background-clearing FSM to remove artifacts during game
+        state transitions.</li>
+      <li><b>Score logic</b> : corrected score updates to occur when the pillar FSM resets its horizontal position.</li>
     </ul>
   </section>
 
   <section class="detail-section">
-    <h2>Implementation Details</h2>
-    <p>
-      The game uses a finite state machine to handle the drawing of objects. To keep performance smooth, the background
-      is only redrawn on a reset or collision, while moving objects (the bird and pillars) use an erase-and-redraw cycle
-      within the VGA arbiter.
-    </p>
-  </section>
-
-  <section class="detail-section">
-    <h2>Score System</h2>
-    <p>
-      The score is tracked using a binary-to-BCD converter and displayed in real time on the HEX0-HEX5 seven-segment
-      displays.
-    </p>
+    <h2>Hardware</h2>
+    <ul>
+      <li><b>FPGA</b> : Terasic DE1-SoC with Intel Cyclone V</li>
+      <li><b>Display</b> : VGA monitor at 640x480</li>
+      <li><b>Audio</b> : microphone through the WM8731 audio codec</li>
+    </ul>
   </section>
 
 </body>
