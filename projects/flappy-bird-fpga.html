@@ -21,21 +21,21 @@
       <a href="../index.html#about">About</a>
       <a href="../index.html#projects">Projects</a>
       <a href="../index.html#skills">Skills</a>
-      <a href="../index.html#involvement">Involvement</a>
+      <a href="../index.html#experience">Experience</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
   </header>
 
   <section class="detail-hero">
     <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
-    <h1>Voice-Controlled "Flappy Bird" Game</h1>
+    <h1>Voice-Controlled “Flappy Bird” Game</h1>
     <div class="subtitle">FPGA-based game controlled by microphone amplitude on the Terasic DE1-SoC</div>
 
     <div class="tags">
       <span class="tag">Verilog</span>
       <span class="tag">FPGA</span>
-      <span class="tag">FSM Architecture</span>
-      <span class="tag">ModelSim</span>
+      <span class="tag">VGA</span>
+      <span class="tag">Audio DSP</span>
     </div>
 
     <div class="detail-photo">
@@ -52,53 +52,45 @@
   </section>
 
   <section class="detail-section">
-    <h2>Overview</h2>
-    <p>
-      A hardware-based side-scrolling game implemented in synthesizable Verilog on the Terasic DE1-SoC.
-      Microphone amplitude controls the player's vertical velocity: louder input produces a larger upward
-      velocity. The game runs entirely on FPGA hardware and renders gameplay through a custom VGA interface.
-    </p>
-  </section>
-
-  <section class="detail-section">
-    <h2>Key Features</h2>
-    <ul>
-      <li><b>Audio-controlled movement</b> : microphone amplitude is converted into player vertical velocity,
-        allowing louder sounds to move the player upward faster.</li>
-      <li><b>VGA rendering</b> : custom hardware renders the player, pillars, and background at 640x480 resolution.</li>
-      <li><b>Hardware game control</b> : FSMs manage game states, object movement, rendering, collision detection,
-        and score updates.</li>
-      <li><b>Hardware verification</b> : wrote SystemVerilog testbenches and used ModelSim to test individual modules
-        before hardware integration.</li>
-    </ul>
-  </section>
-
-  <section class="detail-section">
     <h2>System Architecture</h2>
+    <div class="detail-photo detail-photo-small">
+      <img src="../images/flappybird.jpg" alt="Flappy Bird">
+    </div>
     <ul>
-      <li><b>Audio subsystem</b> : interfaces with the Wolfson WM8731 audio codec through I2C and processes
-        microphone samples to determine signal amplitude.</li>
-      <li><b>Player physics</b> : updates vertical position using velocity and applies gravity between audio inputs.
+      <li><b>Input handling</b>: a microphone interfaces with an audio controller to translate volume into the player
+        object’s vertical velocity.</li>
+      <li><b>VGA rendering</b>: a hardware arbiter manages simultaneous draw and erase requests from the player and
+        pillar modules to the VGA display.</li>
+      <li><b>State control</b>: a finite state machine governs the game states, transitioning from a start menu to
+        active gameplay when audio exceeds a threshold, and halting on collision detection.</li>
+      <li><b>Scorekeeping</b>: a binary-coded decimal counter tracks score and outputs it to a 7-segment hex display.
       </li>
-      <li><b>VGA arbiter</b> : coordinates draw and erase requests from the player, pillars, and background modules
-        through an FSM.</li>
-      <li><b>Collision detection</b> : checks coordinate boundaries between the player, pillars, and screen edges
-        to determine game-over conditions.</li>
-      <li><b>Scorekeeping</b> : tracks the score with BCD logic and displays the result on the DE1-SoC seven-segment
-        displays.</li>
     </ul>
   </section>
 
   <section class="detail-section">
-    <h2>Debugging</h2>
+    <h2>Module Operation Logic</h2>
+    <ol>
+      <li>The player module waits for a clock tick, erases its previous position through the arbiter, updates physics
+        based on vertical velocity, and redraws its coordinates.</li>
+      <li>The pillar module shifts left, checks for screen wrap-around, calculates a new gap, and issues its own VGA
+        draw and erase requests.</li>
+      <li>The collision module continuously evaluates the overlapping coordinate boundaries of the player, pillars, and
+        screen edges.</li>
+    </ol>
+  </section>
+
+  <section class="detail-section">
+    <h2>Debugging and Implementation Fixes</h2>
     <ul>
-      <li><b>VGA artifacts</b> : eliminated visual streaking by changing pillar rendering from row-by-row to
-        column-by-column drawing.</li>
-      <li><b>Obstacle generation</b> : replaced a failing random number generator with deterministic gap-position
-        cycling to produce stable obstacle placement.</li>
-      <li><b>Background persistence</b> : added a dedicated background-clearing FSM to remove artifacts during game
-        state transitions.</li>
-      <li><b>Score logic</b> : corrected score updates to occur when the pillar FSM resets its horizontal position.</li>
+      <li><b>Gap generation</b>: the initial random number generator for pillar gaps failed, so it was replaced with a
+        deterministic counter that cycles through pre-set gap positions.</li>
+      <li><b>VGA artifacts</b>: visual streaking during pillar rendering was resolved by changing the drawing sequence
+        from row-by-row to column-by-column.</li>
+      <li><b>Image persistence</b>: background artifacts remained during game state changes, leading to a dedicated
+        background-clearing FSM.</li>
+      <li><b>Score accuracy</b>: the scoring logic was incorrectly incrementing, and it was fixed to count only when the
+        pillar FSM resets its position.</li>
     </ul>
   </section>
 

@@ -21,7 +21,7 @@
       <a href="../index.html#about">About</a>
       <a href="../index.html#projects">Projects</a>
       <a href="../index.html#skills">Skills</a>
-      <a href="../index.html#involvement">Involvement</a>
+      <a href="../index.html#experience">Experience</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
   </header>
@@ -39,12 +39,8 @@
       <span class="tag">C++</span>
       <span class="tag">FreeRTOS</span>
       <span class="tag">ESP32</span>
-      <span class="tag">ATmega328</span>
       <span class="tag">LoRa</span>
       <span class="tag">AWS IoT Core</span>
-      <span class="tag">MQTT</span>
-      <span class="tag">PCB Design</span>
-      <span class="tag">KiCad</span>
     </div>
     <p style="color:var(--muted); font-family:var(--mono); font-size:0.85rem; margin-top:18px;">
       May. 2026 – Aug. 2026
@@ -57,87 +53,85 @@
   <section class="detail-section">
     <h2>Overview</h2>
     <p>
-      An off-grid air-quality monitoring network designed to collect environmental measurements
-      from distributed sensor nodes and send them to the cloud. Sensor nodes communicate over
-      a LoRa mesh network, while an ESP32 gateway collects the data and uses a SIM7080G cellular
-      modem to upload it to AWS IoT Core.
+      An off-grid air-quality network that collects measurements from distributed sensor nodes and sends them to the
+      cloud. Nodes communicate over LoRa, while an ESP32 gateway uses a SIM7080G cellular modem to upload data to AWS
+      IoT Core.
     </p>
     <p>
-      My work focused on the gateway firmware and the electrochemical sensor interface used by
-      the sensor nodes. The system was designed for long-term outdoor deployment, so power
-      consumption, reliable communication, and low-current sensor measurements were key constraints.
+      The system combines gateway firmware with an electrochemical sensor interface for long-term outdoor deployment,
+      with low power, reliable communication, and nanoamp-level measurements as key constraints.
     </p>
   </section>
 
   <section class="detail-section">
     <h2>Gateway Firmware</h2>
+    <div class="detail-photo detail-photo-small">
+      <img src="../images/gatewaywiring.jpg" alt="Gateway firmware wiring">
+    </div>
     <ul>
       <li>
-        Structured the ESP32 gateway firmware using <strong>FreeRTOS tasks</strong> for sensor
-        collection, LoRa mesh communication, cellular communication, and cloud transmission.
+        Structured the ESP32 gateway with <strong>FreeRTOS tasks</strong> for sensing, LoRa communication, cellular
+        communication, and cloud transmission.
       </li>
       <li>
-        Implemented duty-cycled operation so the gateway could coordinate sensor data collection
-        while limiting cellular and system power consumption.
+        Implemented duty cycling to coordinate data collection while limiting power consumption.
       </li>
       <li>
-        Used <strong>MQTT</strong> over the SIM7080G cellular modem to publish sensor data to
-        <strong>AWS IoT Core</strong>.
+        Published sensor data to <strong>AWS IoT Core</strong> using <strong>MQTT</strong> over the SIM7080G.
       </li>
       <li>
-        Debugged an ESP32 boot failure caused by a <strong>GPIO12 strapping-pin conflict</strong>
-        by moving software serial initialization into the required runtime functions and delaying
-        downlink setup.
+        Fixed an ESP32 boot failure caused by a <strong>GPIO12 strapping-pin conflict</strong> by delaying serial and
+        downlink initialization.
       </li>
       <li>
-        Traced cellular communication failures to <strong>LDO current limits during modem
-          transmission</strong>. The modem was moved from the gateway's regulated supply to the
-        battery supply, eliminating the brownouts.
+        Resolved cellular brownouts caused by <strong>LDO current limits during modem transmission</strong> by powering
+        the modem from the battery supply.
       </li>
     </ul>
   </section>
 
   <section class="detail-section">
     <h2>Electrochemical Sensor Hardware</h2>
+    <div class="detail-photo detail-photo-small">
+      <img src="../images/electrochempcb.jpg" alt="Electrochemical sensor board">
+    </div>
     <p>
-      I designed and built a <strong>4-layer electrochemical breakout board</strong> that plugs
-      into the sensor-node PCB. The board provides the analog front end and ADC needed to measure
-      the low-current output of electrochemical sensors.
+      A <strong>4-layer electrochemical breakout board</strong> plugs into the sensor-node PCB and provides the analog
+      front end and ADC for low-current measurements.
     </p>
 
     <ul>
       <li>
-        Used the <strong>LMP91000</strong> potentiostat analog front end to interface with
-        electrochemical sensors.
+        Used the <strong>LMP91000</strong> potentiostat to interface with electrochemical sensors.
       </li>
       <li>
-        Used the <strong>ADS122C04 24-bit ADC</strong> to measure nanoamp-level sensor currents
-        beyond the resolution available from the sensor node's ATmega328 ADC.
+        Used the <strong>ADS122C04 24-bit ADC</strong> for nanoamp-level currents beyond the sensor node's ATmega328 ADC
+        resolution.
       </li>
       <li>
-        Designed the PCB around the existing sensor-node interface so the electrochemical board
-        could be connected as a plug-in module.
+        Matched the existing sensor-node interface so the board could connect as a plug-in module.
       </li>
     </ul>
   </section>
 
   <section class="detail-section">
     <h2>System Data Flow</h2>
+    <div class="detail-photo detail-photo-small">
+      <img src="../images/grafana.jpg" alt="Grafana visualization">
+    </div>
     <p>
-      Sensor measurements are collected by the sensor nodes and forwarded through the LoRa mesh
-      to the ESP32 gateway. The gateway manages the received data and sends it through the
-      SIM7080G cellular modem to AWS IoT Core for cloud processing and visualization.
+      Sensor nodes forward measurements through the LoRa mesh to the ESP32 gateway, which sends them through the
+      SIM7080G to AWS IoT Core. Data is stored in InfluxDB and visualized with Grafana.
     </p>
   </section>
 
   <section class="detail-section">
     <h2>Key Constraints</h2>
     <ul>
-      <li><strong>Low power:</strong> Nodes operate from battery power with duty-cycled sensing and communication.</li>
-      <li><strong>Low current measurement:</strong> Electrochemical sensors produce signals in the nanoamp range.</li>
-      <li><strong>Wireless communication:</strong> Sensor nodes use LoRa while the gateway uses cellular connectivity.
-      </li>
-      <li><strong>Outdoor deployment:</strong> Hardware must operate without continuous access to grid power.</li>
+      <li><strong>Low power:</strong> Battery-powered nodes use duty-cycled sensing and communication.</li>
+      <li><strong>Low current:</strong> Electrochemical sensors produce nanoamp-level signals.</li>
+      <li><strong>Connectivity:</strong> Nodes use LoRa and the gateway uses cellular.</li>
+      <li><strong>Deployment:</strong> Hardware operates without continuous grid power.</li>
     </ul>
   </section>
 

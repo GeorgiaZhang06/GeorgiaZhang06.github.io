@@ -21,7 +21,7 @@
       <a href="../index.html#about">About</a>
       <a href="../index.html#projects">Projects</a>
       <a href="../index.html#skills">Skills</a>
-      <a href="../index.html#involvement">Involvement</a>
+      <a href="../index.html#experience">Experience</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
   </header>
@@ -37,7 +37,6 @@
       <span class="tag">LTSpice</span>
       <span class="tag">RF Design</span>
       <span class="tag">PCB Design</span>
-      <span class="tag">Oscilloscope & Multimeter</span>
     </div>
 
     <div class="detail-photo">
@@ -60,48 +59,57 @@
 
   <section class="detail-section">
     <h2>RF Front-End</h2>
+    <div class="detail-photo detail-photo-small">
+      <img src="../images/rfschematic.jpg" alt="RF front-end schematic">
+    </div>
     <ul>
-      <li><b>Bandpass filter</b> : designed a 3rd-order LC Butterworth filter with 50&Omega; input and output
+      <li><b>Bandpass filter</b>: designed a 3rd-order LC Butterworth filter with 50&Omega; input and output
         matching for the 8–16 MHz RF passband.</li>
 
-      <li><b>Quadrature mixer</b> : implemented separate I and Q double-balanced mixer paths using RF transformers
+      <li><b>Quadrature mixer</b>: implemented separate I and Q double-balanced mixer paths using RF transformers
         and Schottky diodes for RF downconversion.</li>
 
-      <li><b>I/Q amplifier</b> : designed active low-pass amplifier stages to remove mixer products above 96 kHz
+      <li><b>I/Q amplifier</b>: designed active low-pass amplifier stages to remove mixer products above 96 kHz
         while providing the required baseband gain.</li>
     </ul>
   </section>
 
   <section class="detail-section">
     <h2>Simulation &amp; Testing</h2>
+    <div class="detail-photo detail-photo-small">
+      <img src="../images/frafilter.jpg" alt="RF filter test">
+    </div>
     <ul>
-      <li><b>Filter simulation</b> : used LTSpice to verify the Butterworth filter response and component values
+      <li><b>Filter simulation</b>: used LTSpice to verify the Butterworth filter response and component values
         before PCB fabrication.</li>
 
-      <li><b>Filter testing</b> : measured 8.55 MHz and 14.82 MHz band edges using an oscilloscope frequency
+      <li><b>Filter testing</b>: measured 8.55 MHz and 14.82 MHz band edges using an oscilloscope frequency
         response analysis sweep.</li>
 
-      <li><b>Mixer testing</b> : applied 9 MHz quadrature LO signals and measured the expected frequency components
+      <li><b>Mixer testing</b>: applied 9 MHz quadrature LO signals and measured the expected frequency components
         at the mixer outputs using oscilloscope FFT analysis.</li>
 
-      <li><b>Amplifier testing</b> : measured 20.32 dB gain from a 50 mV input before the amplifier failed during
+      <li><b>Amplifier testing</b>: measured 20.32 dB gain from a 50 mV input before the amplifier failed during
         testing.</li>
     </ul>
   </section>
 
   <section class="detail-section">
     <h2>Debugging</h2>
+    <div class="detail-photo detail-photo-small">
+      <img src="../images/pcbtest.jpg" alt="SDR PCB testing">
+    </div>
     <ul>
-      <li><b>Transformer replacement</b> : replaced a failed RF transformer after no output was measured from the
+      <li><b>Transformer replacement</b>: replaced a failed RF transformer after no output was measured from the
         mixer, restoring mixer operation.</li>
 
-      <li><b>TXEN bypass</b> : bypassed a faulty TX enable switch with jumper connections to restore the RF signal
+      <li><b>TXEN bypass</b>: bypassed a faulty TX enable switch with jumper connections to restore the RF signal
         path.</li>
 
-      <li><b>Amplifier failure</b> : traced the amplifier supply to approximately 3.3 V instead of the required
+      <li><b>Amplifier failure</b>: traced the amplifier supply to approximately 3.3 V instead of the required
         4.5 V minimum before the OPA1642 failed during testing.</li>
 
-      <li><b>PCB interconnect</b> : corrected three misaligned connector pins between the subsystem PCB and mainboard
+      <li><b>PCB interconnect</b>: corrected three misaligned connector pins between the subsystem PCB and mainboard
         using jumper wires.</li>
     </ul>
   </section>

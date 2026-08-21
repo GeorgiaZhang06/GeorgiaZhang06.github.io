@@ -21,7 +21,7 @@
       <a href="../index.html#about">About</a>
       <a href="../index.html#projects">Projects</a>
       <a href="../index.html#skills">Skills</a>
-      <a href="../index.html#involvement">Involvement</a>
+      <a href="../index.html#experience">Experience</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
   </header>
@@ -32,15 +32,14 @@
     <h1>Digital Logic Simulator</h1>
 
     <div class="subtitle">
-      Bare-metal digital logic simulator running on a NIOS-V processor and DE1-SoC FPGA
+      Bare-metal digital logic simulator running on a RISC-V processor and DE1-SoC FPGA
     </div>
 
     <div class="tags">
       <span class="tag">C</span>
-      <span class="tag">C#</span>
-      <span class="tag">NIOS-V</span>
+      <span class="tag">RISC-V</span>
       <span class="tag">MMIO</span>
-      <span class="tag">GDB</span>
+      <span class="tag">VGA</span>
     </div>
 
     <div class="detail-photo">
@@ -60,120 +59,141 @@
     <h2>Overview</h2>
 
     <p>
-      A bare-metal digital logic simulator written in <b>C</b> and deployed on the
-      <b>NIOS-V</b> processor of the DE1-SoC FPGA board. The simulator builds and
-      evaluates user-defined digital circuits containing combinational and sequential
-      logic, then displays the circuit and wire states on a VGA monitor.
+      A bare-metal digital logic simulator for the <b>RISC-V</b> processor on the DE1-SoC FPGA. Users described circuits
+      in a <code>.log</code> file, loaded them into memory, and interacted with them through PS/2 and VGA.
     </p>
 
     <p>
-      The system was implemented without an operating system or hardware abstraction
-      layer. Peripheral input and output were handled directly through
-      <b>memory-mapped I/O</b>, including VGA, PS/2, LEDs, and HEX displays.
+      It supported combinational and sequential logic, live wire-state visualization, input control, and truth tables
+      for smaller combinational circuits.
     </p>
   </section>
 
   <section class="detail-section">
     <h2>System Architecture</h2>
-
+    <div class="detail-photo detail-photo-small">
+      <img src="../images/circuitvga.jpg" alt="Circuit VGA Display">
+    </div>
     <ul>
-      <li>
-        <b>Circuit model:</b> represented gates and wires as software structures,
-        evaluated gate outputs from their input wire states, and supported
-        combinational and sequential circuits.
-      </li>
+      <p>
+        The system parsed circuit data, evaluated gate and wire states, and rendered the design directly on the FPGA
+        display.
+      </p>
 
-      <li>
-        <b>Gate builder:</b> parsed compiled circuit data from memory and created
-        the corresponding gates and wire connections at their specified VGA coordinates.
-      </li>
+      <ul>
+        <li>
+          <b>Circuit model:</b> represented gates and wires, evaluated outputs, and supported combinational and
+          sequential
+          logic.
+        </li>
 
-      <li>
-        <b>Wire routing:</b> automatically connected wires between gates and supported
-        multiple destinations from a single wire.
-      </li>
+        <li>
+          <b>Gate builder:</b> parsed compiled data and placed gates and wires at their VGA coordinates.
+        </li>
 
-      <li>
-        <b>Sequential logic:</b> implemented latch behavior and updated circuit
-        evaluation to retain state between clock cycles.
-      </li>
-    </ul>
+        <li>
+          <b>Wire routing:</b> connected gates and supported multiple destinations for each wire.
+        </li>
+
+        <li>
+          <b>Sequential logic:</b> retained latch state between clock cycles.
+        </li>
+
+        <li>
+          <b>VGA rendering:</b> displayed gates and wires, using red and green to show logic values.
+        </li>
+      </ul>
   </section>
 
   <section class="detail-section">
-    <h2>Compiler</h2>
-
-    <p>
-      Circuit definitions were written as text files and converted into binary
-      instruction data before being loaded onto the FPGA.
-    </p>
+    <h2>Project Workflow</h2>
 
     <ol>
       <li>
-        A circuit was described using gate type, wire IDs, and screen coordinates.
+        The circuit was described in a <code>.log</code> file, with one gate per line.
       </li>
 
       <li>
-        A custom <b>C# compiler</b> converted the circuit description into a
-        binary instruction file.
+        A custom <b>C# compiler</b> converted the description into binary.
       </li>
 
       <li>
-        The binary was loaded into FPGA memory at
-        <code>0x40000000</code> using <b>GDB</b>.
+        <b>GDB</b> loaded the binary at <code>0x40000000</code>.
       </li>
 
       <li>
-        The NIOS-V program parsed the instructions and constructed the circuit
-        in memory.
+        The <b>RISC-V</b> program built the circuit in memory and displayed it on VGA.
       </li>
     </ol>
   </section>
 
   <section class="detail-section">
-    <h2>VGA &amp; User Input</h2>
+    <h2>Input &amp; Controls</h2>
+
+    <div class="detail-photo detail-photo-small">
+      <img src="../images/truthtable.jpg" alt="Truth Table">
+    </div>
+
+    <p>
+      Interrupt-driven PS/2 input enabled navigation and real-time control of circuit inputs.
+    </p>
+
+    <ul>
+      <li><b>Up / Down</b>: moved between input wires, with the selected wire highlighted in purple and bold.</li>
+      <li><b>0 / 1</b>: changed the selected input wire value.</li>
+      <li><b>Enter</b>: toggled between the home screen and the instruction page.</li>
+      <li><b>T</b>: displayed a truth table when available.</li>
+      <li><b>Key 0</b>: reloaded a new circuit from memory location <code>0x40000000</code>.</li>
+    </ul>
+  </section>
+
+  <section class="detail-section">
+    <h2>Output Displays</h2>
 
     <ul>
       <li>
-        <b>VGA:</b> rendered AND, OR, XOR, NAND, NOR, NOT, and MUX gates and
-        automatically routed wires between circuit elements.
+        <b>VGA</b>: displayed the instruction page, the active circuit, or the generated truth table depending on the
+        selected mode.
       </li>
 
       <li>
-        <b>PS/2 keyboard:</b> allowed users to select input wires and change
-        their logic values during operation.
+        <b>HEX display</b>: showed <code>notbl</code> when a truth table was unavailable, such as for sequential
+        circuits or circuits with too many inputs/outputs.
       </li>
 
       <li>
-        <b>Wire states:</b> displayed logic values using different wire states
-        on the VGA output.
-      </li>
-
-      <li>
-        <b>Truth tables:</b> generated truth tables for supported combinational
-        circuits by evaluating every input combination.
-      </li>
-
-      <li>
-        <b>LEDs and HEX:</b> displayed output states and indicated when a truth
-        table was unavailable.
+        <b>LEDs</b>: displayed the state of the output wires according to each wire index.
       </li>
     </ul>
+  </section>
+
+  <section class="detail-section">
+    <h2>Gate Input Format</h2>
+
+    <p>
+      Each line in the <code>.log</code> file defined one gate:
+    </p>
+
+    <div class="code-block">
+      [GATE TYPE] [INPUT 1 ID] [INPUT 2 ID] [OUTPUT ID] [X COORDINATE] [Y COORDINATE]
+    </div>
+
+    <p>
+      For MUX gates, the wire at index <code>INPUT 2 ID + 1</code> had to be free for the select input.
+    </p>
   </section>
 
   <section class="detail-section">
     <h2>Hardware Interface</h2>
 
     <p>
-      The application interacted directly with FPGA peripherals through fixed
-      memory-mapped addresses rather than relying on an operating system.
+      The application accessed FPGA peripherals through fixed memory-mapped addresses.
     </p>
 
     <ul>
-      <li>Wrote pixel data directly to the VGA framebuffer.</li>
-      <li>Polled the PS/2 interface for keyboard input.</li>
-      <li>Controlled LEDs and HEX displays through MMIO registers.</li>
-      <li>Loaded compiled circuit data into SDRAM through GDB.</li>
+      <li>Wrote pixels to the VGA framebuffer.</li>
+      <li>Handled PS/2 input through interrupts.</li>
+      <li>Controlled LEDs and HEX displays through MMIO.</li>
     </ul>
   </section>
 
